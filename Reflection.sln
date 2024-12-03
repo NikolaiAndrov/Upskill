@@ -5,6 +5,8 @@ VisualStudioVersion = 17.11.35431.28
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stealer", "Stealer\Stealer.csproj", "{117F9B19-4453-47AA-9F14-DB9C9DB3799F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reflection", "Reflection", "{1DC35996-6614-49C2-8EBC-BC7C4F851F56}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,6 +20,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{117F9B19-4453-47AA-9F14-DB9C9DB3799F} = {1DC35996-6614-49C2-8EBC-BC7C4F851F56}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A8C8AB2-C2BE-4BD0-8138-DBB1B6743075}
