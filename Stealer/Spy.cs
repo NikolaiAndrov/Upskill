@@ -95,5 +95,34 @@
 
             return sb.ToString().TrimEnd();
         }
+
+        public string CollectGettersAndSetters(string className)
+        {
+            Type type = Type.GetType(className)!;
+
+            if(type == null)
+            {
+                return "Content not found!";
+            }
+
+            MethodInfo[] methods = type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic 
+                | BindingFlags.Instance | BindingFlags.Static);
+
+            StringBuilder sb = new StringBuilder();
+
+            foreach (var method in methods.Where(m => m.Name.StartsWith("get") || m.Name.StartsWith("set")).OrderBy(m => m.Name))
+            {
+                if (method.Name.StartsWith("get"))
+                {
+                    sb.AppendLine($"{method.Name} will return {method.ReturnType}");
+                }
+                else if (method.Name.StartsWith("set"))
+                {
+                    sb.AppendLine($"{method.Name} will set {method.GetParameters().First().ParameterType}");
+                }
+            }
+
+            return sb.ToString().TrimEnd();
+        }
     }
 }

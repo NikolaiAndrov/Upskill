@@ -15,6 +15,9 @@
                 PrintHeader();
                 string privateMethods = spy.RevealPrivateMethods("Stealer.Hacker");
                 Console.WriteLine(privateMethods);
+                PrintHeader();
+                string gs = spy.CollectGettersAndSetters("Stealer.Hacker");
+                Console.WriteLine(gs);
             }
             catch (Exception)
             {
