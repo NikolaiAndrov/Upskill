@@ -11,7 +11,7 @@
 
             if (type == null )
             {
-                return "";
+                return "Content not found!";
             }
 
             StringBuilder sb = new StringBuilder();
@@ -31,7 +31,46 @@
                 }
             }
 
-            return sb.ToString();
+            return sb.ToString().TrimEnd();
+        }
+
+        public string AnalyzeAccessModifiers(string className)
+        {
+            Type type = Type.GetType(className)!;
+
+            if (type == null)
+            {
+                return "Content not found!";
+            }
+
+            StringBuilder sb = new StringBuilder();
+
+            FieldInfo[] fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+
+            foreach (var field in fields)
+            {
+                if (field.IsPublic)
+                {
+                    sb.AppendLine($"{field.Name} must be private!");
+                }
+            }
+
+            MethodInfo[] methods = type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic
+                | BindingFlags.Instance | BindingFlags.Static);
+
+            foreach (var method in methods)
+            {
+                if (method.IsPrivate && method.Name.StartsWith("get"))
+                {
+                    sb.AppendLine($"{method.Name} have to be public!");
+                }
+                else if (method.IsPublic && method.Name.StartsWith("set"))
+                {
+                    sb.AppendLine($"{method.Name} have to be private!");
+                }
+            }
+
+            return sb.ToString().TrimEnd();
         }
     }
 }
