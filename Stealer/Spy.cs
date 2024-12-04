@@ -72,5 +72,28 @@
 
             return sb.ToString().TrimEnd();
         }
+
+        public string RevealPrivateMethods(string className)
+        {
+            Type type = Type.GetType(className)!;
+
+            if(type == null)
+            {
+                return "Content not found!";
+            }
+
+            MethodInfo[] methods = type.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"All Private Methods of Class: {type.FullName}");
+            sb.AppendLine($"Base Class: {type.BaseType!.Name}");
+
+            foreach (var method in methods)
+            {
+                sb.AppendLine($"{method.Name}");
+            }
+
+            return sb.ToString().TrimEnd();
+        }
     }
 }
