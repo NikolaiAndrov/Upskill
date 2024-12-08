@@ -7,7 +7,7 @@
     {
         public override bool IsValid(object obj)
         {
-            return obj != null;
+            return obj != null && !string.IsNullOrWhiteSpace(obj.ToString()); ;
         }
     }
 }
