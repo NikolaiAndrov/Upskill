@@ -1,10 +1,8 @@
-﻿using CommandPattern.Core.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CommandPattern.Core.Models
+﻿namespace CommandPattern.Core.Models
 {
+    using CommandPattern.Core.Contracts;
+    using System;
+
     public class Engine : Contracts.IEngine
     {
         private readonly ICommandInterpreter commandInterpreter;
@@ -16,9 +14,19 @@ namespace CommandPattern.Core.Models
 
         public void Run()
         {
-            string commandArgs = Console.ReadLine();
-            string result = this.commandInterpreter.Read(commandArgs);
-            Console.WriteLine(result);
+            while (true)
+            {
+                try
+                {
+                    string commandArgs = Console.ReadLine();
+                    string result = this.commandInterpreter.Read(commandArgs);
+                    Console.WriteLine(result);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Something went wrong, error message: {ex.Message}");
+                }
+            }
         }
     }
 }
