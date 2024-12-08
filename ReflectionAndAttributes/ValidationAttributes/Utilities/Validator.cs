@@ -6,9 +6,9 @@
 
     public static class Validator
     {
-        public static bool IsValid(object value)
+        public static bool IsValid(object obj)
         {
-            Type type = value.GetType();
+            Type type = obj.GetType();
 
             PropertyInfo[] properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
@@ -18,7 +18,7 @@
 
                 foreach (var attribute in attributes)
                 {
-                    var propertyValue = property.GetValue(value);
+                    var propertyValue = property.GetValue(obj);
 
                     if (!attribute.IsValid(propertyValue))
                     {
