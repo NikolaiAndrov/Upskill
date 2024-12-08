@@ -4,7 +4,7 @@
     {
         public string Execute(string[] args)
         {
-            return $"Hello {args[0]}";
+            return $"Hello, {string.Join(" ", args)}";
         }
     }
 }
