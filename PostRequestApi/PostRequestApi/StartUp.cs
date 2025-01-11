@@ -63,15 +63,6 @@
             {
                 Console.WriteLine($"Error {response.StatusCode}");
             }
-
-            HttpResponseMessage result = client.GetAsync("posts").Result;
-
-            if (result.IsSuccessStatusCode)
-            {
-                string resultStr = result.Content.ReadAsStringAsync().Result;
-                Console.WriteLine("Get result:");
-                Console.WriteLine(resultStr);
-            }
         }
     }
 }
