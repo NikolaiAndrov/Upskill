@@ -23,9 +23,9 @@
 
             if (result.IsSuccessStatusCode)
             {
-                string resultStr = result.Content.ReadAsStringAsync().Result;
+                string jsonStr = result.Content.ReadAsStringAsync().Result;
                 Console.WriteLine("Get result:");
-                Console.WriteLine(resultStr);
+                Console.WriteLine(jsonStr);
             }
         }
 
