@@ -23,9 +23,25 @@
 
             if (result.IsSuccessStatusCode)
             {
-                string jsonStr = result.Content.ReadAsStringAsync().Result;
-                Console.WriteLine("Get result:");
-                Console.WriteLine(jsonStr);
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+
+                string jsonStr = await result.Content.ReadAsStringAsync();
+                ICollection<GetResponse>? dtos = JsonSerializer.Deserialize<GetResponse[]>(jsonStr, options);
+
+                if (dtos != null)
+                {
+                    Console.WriteLine("Get result:");
+
+                    foreach (var dto in dtos)
+                    {
+                        Console.WriteLine(dto.ToString());
+                        Console.WriteLine();
+                    }
+                }
+
             }
         }
 
