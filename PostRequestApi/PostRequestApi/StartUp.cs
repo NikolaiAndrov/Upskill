@@ -34,12 +34,22 @@
 
                 if (postResponse != null)
                 {
+                    Console.WriteLine("Post result:");
                     Console.WriteLine($"Id {postResponse.Id}");
                 }
             }
             else
             {
                 Console.WriteLine($"Error {response.StatusCode}");
+            }
+
+            HttpResponseMessage result = client.GetAsync("posts").Result;
+
+            if (result.IsSuccessStatusCode)
+            {
+                string resultStr = result.Content.ReadAsStringAsync().Result;
+                Console.WriteLine("Get result:");
+                Console.WriteLine(resultStr);
             }
 
             client.Dispose();
