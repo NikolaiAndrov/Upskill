@@ -7,15 +7,36 @@
     {
         static async Task Main(string[] args)
         {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("https://jsonplaceholder.typicode.com/");
+
+            await PostApi(client);
+            Console.WriteLine();
+            await GetApi(client);
+
+            client.Dispose();
+        }
+
+        static async Task GetApi(HttpClient client)
+        {
+            HttpResponseMessage result = client.GetAsync("posts").Result;
+
+            if (result.IsSuccessStatusCode)
+            {
+                string resultStr = result.Content.ReadAsStringAsync().Result;
+                Console.WriteLine("Get result:");
+                Console.WriteLine(resultStr);
+            }
+        }
+
+        static async Task PostApi(HttpClient client)
+        {
             PostData postData = new PostData
             {
                 Name = "John Doe",
                 Age = 30,
                 Address = "123 Elm St."
             };
-
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("https://jsonplaceholder.typicode.com/");
 
             string jsonStr = JsonSerializer.Serialize(postData);
             StringContent content = new StringContent(jsonStr, Encoding.UTF8, "application/json");
@@ -51,8 +72,6 @@
                 Console.WriteLine("Get result:");
                 Console.WriteLine(resultStr);
             }
-
-            client.Dispose();
         }
     }
 }
