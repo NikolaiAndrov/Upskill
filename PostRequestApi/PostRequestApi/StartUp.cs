@@ -41,6 +41,8 @@
             {
                 Console.WriteLine($"Error {response.StatusCode}");
             }
+
+            client.Dispose();
         }
     }
 }
