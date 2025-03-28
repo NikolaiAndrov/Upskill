@@ -28,5 +28,10 @@
         {
             return this.timestamp;
         }
+
+        public override string ToString()
+        {
+            return $"Title: {this.title}, Content: {this.content}, Timestamp: {this.timestamp}";
+        }
     }
 }
